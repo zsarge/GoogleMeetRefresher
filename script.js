@@ -78,17 +78,16 @@ function updateTime() {
 })();
 
 // Main Loop
-var checkExist = setInterval(() => {
+var timer = setInterval(() => {
     if (failedToJoin()) {
         updateTime();
         timeUntilReload -= increment;
 
         if (timeUntilReload < 1) {
             location.reload();
-            console.log("reloaded");
-            clearInterval(checkExist)
+            clearInterval(timer)
         }
     } else {
-        clearInterval(checkExist)
+        clearInterval(timer)
     }
 }, increment);
