@@ -11,17 +11,33 @@
 
 var timeUntilReload = 5000;
 const increment = 100;
+
 const divClass = "countdownText";
-const mainDivClass = "jtEd4b";
+var mainDivClass = "";
 // mainDivClass should be a div with the content:
 // "You can't create a meeting yourself. Contact your system administrator for more information."
+
+const errorText = "You can't create a meeting yourself";
+const customText = "Failed to join meeting.";
+
+function getClassWithText(tags, text) {
+    for (var i = 0; i < tags.length; i++) {
+        if (tags[i].textContent.includes(text)) {
+            // make sure it is just text, and not a parent node
+            if (tags[i].childNodes.length == 1) {
+                // this is the div we want to work with
+                return tags[i].className
+            }
+        }
+    }
+}
 
 function failedToJoin() {
     let page = document.body.textContent;
     let url = window.location.href;
 
     if (url.includes("lookup") || url.includes("whoops")) {
-        return page.includes("system administrator") || page.includes("Failed")
+        return page.includes(errorText) || page.includes(customText)
     }
 }
 
@@ -33,13 +49,13 @@ function timeString() {
 }
 
 function appendCoundownDiv() {
-        let node = document.createElement("div");
-        node.setAttribute('class', divClass);
-        let textnode = document.createTextNode(timeString());
-        node.appendChild(textnode);
-        console.log(node)
+    let node = document.createElement("div");
+    node.setAttribute('class', divClass);
+    let textnode = document.createTextNode(timeString());
+    node.appendChild(textnode);
+    console.log(node)
 
-        document.body.getElementsByClassName(mainDivClass)[0].appendChild(node);
+    document.body.getElementsByClassName(mainDivClass)[0].appendChild(node);
 }
 
 function updateTime() {
@@ -47,6 +63,19 @@ function updateTime() {
     header[0].textContent = timeString()
     console.log(timeString())
 }
+
+// Main Setup Function
+(function() {
+    if (failedToJoin()) {
+        // Replace default error with custom text
+        var divTags = document.getElementsByTagName("div");
+        mainDivClass = getClassWithText(divTags, errorText);
+        document.body.getElementsByClassName(mainDivClass)[0].textContent = customText;
+
+        // Create countdown element
+        appendCoundownDiv();
+    }
+})();
 
 // Main Loop
 var checkExist = setInterval(() => {
@@ -59,15 +88,7 @@ var checkExist = setInterval(() => {
             console.log("reloaded");
             clearInterval(checkExist)
         }
-     } else {
-         clearInterval(checkExist)
-     }
-}, increment);
-
-// Main Setup Function
-(function() {
-    if (failedToJoin()) {
-        document.body.getElementsByClassName(mainDivClass)[0].textContent = "Failed to join meeting.";
-        appendCoundownDiv();
+    } else {
+        clearInterval(checkExist)
     }
-})();
+}, increment);
