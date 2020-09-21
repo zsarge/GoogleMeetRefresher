@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Meet Refresher
 // @namespace    https://github.com/zsarge/
-// @version      1
+// @version      1.1
 // @description  Automatically refreshes Google Meet when the user joins a link before a meeting is properly set up.
 // @author       Zack Sargent
 // @match        https://meet.google.com/*
@@ -25,7 +25,6 @@ function getClassWithText(tags, text) {
         if (tags[i].textContent.includes(text)) {
             // make sure it is just text, and not a parent node
             if (tags[i].childNodes.length == 1) {
-                // this is the div we want to work with
                 return tags[i].className
             }
         }
@@ -42,7 +41,6 @@ function failedToJoin() {
 }
 
 function timeString() {
-    // Multiply and divide by 10 to get a decimal place of precision
     let seconds = Math.round(timeUntilReload / 1000)
     let plural = (seconds == 1) ? "second" : "seconds"
     return `This page will refresh in ${seconds} ${plural}.`
