@@ -6,6 +6,7 @@ This is a [Tampermonkey](https://www.tampermonkey.net) script that makes [Google
 At my school, we have a constant Google Meet link for each class, for when we have to go remote.
 
 We are given something like this link:
+
 ![Constant Google Meet link](https://i.imgur.com/jRPuiHG.png)
 
 Unfortunately, when a remote student joins a class before a teacher starts the meeting on their end, the student has to sit and click 'refresh' over and over.
