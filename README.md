@@ -9,11 +9,10 @@ We are given something like this link:
 
 ![Static Google Meet link](https://i.imgur.com/jRPuiHG.png)
 
-Unfortunately, when a remote student joins a class before a teacher starts the meeting on their end, the student has to sit and click 'refresh' over and over.
+Unfortunately, when a remote student joins a class before a teacher starts the meeting on their end, the student has to sit and click 'reload' over and over.
+The teacher can start a meeting, and if the student does not refresh the page they will never know.
 
-Note: This is not just a button to make the student feel better. The teacher can start a meeting, and if the student does not refresh the page they will never know.
-
-We just see this error page:
+This is the error page we see:
 ![Without script](https://i.imgur.com/n4zgO51.png)
 
 After having some teachers start their meeting late, and some teachers never start their meeting at all, I can say it is very annoying to waste your time sitting and clicking a button when you could be doing anything else.
